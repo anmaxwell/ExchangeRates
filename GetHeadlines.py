@@ -9,5 +9,7 @@ top_uk_headlines = newsapi.get_top_headlines(category=('business' or 'technology
                                           language='en',
                                           country='gb')
 
+headlines = []
 for item in top_uk_headlines['articles']:
-    print(item['title'])
+    headlines.append(item['title'])
+
