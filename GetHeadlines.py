@@ -25,14 +25,17 @@ def embed(input):
     return model(input)
 
 # Create a list of the latest headlines converted to vectors
-headlines = []
+headlines_text = []
 for item in top_uk_headlines['articles']:
     headline_txt = item['title']
-    headlines.append(vector_USE)
+    headlines_text.append(headline_txt)
 
-#create vectors from questions
-vector_USE = embed(headlines)
-print('vector', vector_USE, headlines)
+headline_vectors = []
+for headline in headlines_text:
+    #create vectors from questions
+    vector_USE = embed([headline])
+    print('vector', vector_USE, headline)
+    headline_vectors.append(vector_USE)
 
 # Check if the directory is there to write the output file else create it
 path = 'ukheadlines'
@@ -44,4 +47,4 @@ if not os.path.exists(path):
   
 print('created: ',filename)
 with open(dirpath, 'w') as outfile:
-    json.dump(headlines, outfile)
+    json.dump(headline_vectors, outfile)
