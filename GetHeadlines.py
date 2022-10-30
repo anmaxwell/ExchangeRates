@@ -53,6 +53,5 @@ dirpath = os.path.join(path, filename + '.json')
 if not os.path.exists(path):
     os.makedirs(path) 
   
-print('created: ',filename)
 with open(dirpath, 'w') as outfile:
     json.dump(headline_vectors, outfile)
