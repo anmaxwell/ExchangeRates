@@ -16,6 +16,11 @@ top_uk_headlines = newsapi.get_top_headlines(category=('business' or 'technology
                                           language='en',
                                           country='gb')
 
+# Get the top US headlines for the day
+top_us_headlines = newsapi.get_top_headlines(category=('business' or 'technology'),
+                                          language='en',
+                                          country='us')
+
 #Loading pretrained model
 module_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 model = hub.load(module_url)
@@ -30,6 +35,10 @@ for item in top_uk_headlines['articles']:
     headline_txt = item['title']
     headlines_text.append(headline_txt)
 
+for item in top_us_headlines['articles']:
+    headline_txt = item['title']
+    headlines_text.append(headline_txt)
+
 headline_vectors = []
 for headline in headlines_text:
     #create vectors from questions
@@ -37,8 +46,8 @@ for headline in headlines_text:
     headline_vectors.append(np.array(vector_USE).tolist())
 
 # Check if the directory is there to write the output file else create it
-path = 'ukheadlines'
-filename = 'ukheadlines_'+str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
+path = 'headlines'
+filename = 'headlines_'+str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
 dirpath = os.path.join(path, filename + '.json')
 
 if not os.path.exists(path):
