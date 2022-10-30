@@ -28,12 +28,11 @@ def embed(input):
 headlines = []
 for item in top_uk_headlines['articles']:
     headline_txt = item['title']
-
-    #create vectors from questions
-    vector_USE = embed(headline_txt)
-    print('vector', vector_USE)
-
     headlines.append(vector_USE)
+
+#create vectors from questions
+vector_USE = embed(headlines)
+print('vector', vector_USE, headlines)
 
 # Check if the directory is there to write the output file else create it
 path = 'ukheadlines'
