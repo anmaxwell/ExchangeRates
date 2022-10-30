@@ -34,8 +34,7 @@ headline_vectors = []
 for headline in headlines_text:
     #create vectors from questions
     vector_USE = embed([headline])
-    print('vector', vector_USE, headline)
-    headline_vectors.append(vector_USE)
+    headline_vectors.append(np.array(vector_USE).tolist())
 
 # Check if the directory is there to write the output file else create it
 path = 'ukheadlines'
